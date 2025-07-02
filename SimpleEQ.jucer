@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <JUCERPROJECT id="ia2bCv" name="SimpleEQ" projectType="audioplug" useAppConfig="0"
-              addUsingNamespaceToJuceHeader="0" jucerFormatVersion="1">
+              addUsingNamespaceToJuceHeader="0" jucerFormatVersion="1" pluginFormats="buildLV2,buildStandalone"
+              projectLineFeed="&#10;" lv2Uri="https://github.com/sy3c4ll/SimpleEQ"
+              pluginCode="SpEQ" companyWebsite="https://sy3c4ll.github.io"
+              companyName="sy3c4ll" pluginManufacturerCode="syc4" aaxIdentifier="io.github.sy3c4ll.SimpleEQ">
   <MAINGROUP id="T3e9uO" name="SimpleEQ">
     <GROUP id="{935349E7-B62D-41E9-3F02-547B2C31C77F}" name="Source">
       <FILE id="lJtemO" name="PluginProcessor.cpp" compile="1" resource="0"
