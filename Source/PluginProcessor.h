@@ -10,6 +10,15 @@
 
 #include <JuceHeader.h>
 
+struct ChainSettings
+{
+    float lowCutFreq { 0 }, highCutFreq { 0 };
+    int lowCutSlope { 0 }, highCutSlope { 0 };
+    float peakFreq { 0 }, peakGainInDecibels { 0 }, peakQuality { 1. };
+};
+
+ChainSettings getChainSettings (juce::AudioProcessorValueTreeState& apvts);
+
 //==============================================================================
 /**
 */
@@ -54,12 +63,13 @@ public:
     void setStateInformation (const void* data, int sizeInBytes) override;
 
     static juce::AudioProcessorValueTreeState::ParameterLayout createParameterLayout();
-    juce::AudioProcessorValueTreeState apvts{*this, nullptr, "Parameters", createParameterLayout()};
+    juce::AudioProcessorValueTreeState apvts { *this, nullptr, "Parameters", createParameterLayout() };
 
 private:
     using Filter = juce::dsp::IIR::Filter<float>;
     using CutFilter = juce::dsp::ProcessorChain<Filter, Filter, Filter, Filter>;
     using MonoChain = juce::dsp::ProcessorChain<CutFilter, Filter, CutFilter>;
+    enum ChainPositions { LowCut, Peak, HighCut };
 
     MonoChain leftChain, rightChain;
 
