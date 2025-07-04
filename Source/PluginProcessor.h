@@ -20,9 +20,9 @@ enum Slope
 
 struct ChainSettings
 {
+    float peakFreq { 0 }, peakGainInDecibels { 0 }, peakQuality { 1. };
     float lowCutFreq { 0 }, highCutFreq { 0 };
     Slope lowCutSlope { Slope::Slope_12 }, highCutSlope { Slope::Slope_12 };
-    float peakFreq { 0 }, peakGainInDecibels { 0 }, peakQuality { 1. };
 };
 
 ChainSettings getChainSettings (juce::AudioProcessorValueTreeState& apvts);
@@ -81,9 +81,9 @@ private:
     enum ChainPositions { LowCut, Peak, HighCut };
 
     void updateFilters();
+    void updatePeakFilter (const ChainSettings& chainSettings);
     void updateLowCutFilters (const ChainSettings& chainSettings);
     void updateHighCutFilters (const ChainSettings& chainSettings);
-    void updatePeakFilter (const ChainSettings& chainSettings);
     static void updateCoefficients (Coefficients& old, const Coefficients& replacements);
 
     template<int Index, typename ChainType, typename CoefficientType>
