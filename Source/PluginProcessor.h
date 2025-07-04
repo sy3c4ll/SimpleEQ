@@ -83,6 +83,49 @@ private:
     void updatePeakFilter (const ChainSettings& chainSettings);
     static void updateCoefficients (Coefficients& old, const Coefficients& replacements);
 
+    template<typename ChainType, typename CoefficientType>
+    void updateCutFilter (ChainType& cutFilter,
+                          const CoefficientType& cutCoefficients,
+                          const Slope& slope)
+    {
+        cutFilter.template setBypassed<0>(true);
+        cutFilter.template setBypassed<1>(true);
+        cutFilter.template setBypassed<2>(true);
+        cutFilter.template setBypassed<3>(true);
+
+        switch (slope)
+        {
+            case Slope_12:
+                *cutFilter.template get<0>().coefficients = *cutCoefficients[0];
+                cutFilter.template setBypassed<0>(false);
+                break;
+            case Slope_24:
+                *cutFilter.template get<0>().coefficients = *cutCoefficients[0];
+                cutFilter.template setBypassed<0>(false);
+                *cutFilter.template get<1>().coefficients = *cutCoefficients[1];
+                cutFilter.template setBypassed<1>(false);
+                break;
+            case Slope_36:
+                *cutFilter.template get<0>().coefficients = *cutCoefficients[0];
+                cutFilter.template setBypassed<0>(false);
+                *cutFilter.template get<1>().coefficients = *cutCoefficients[1];
+                cutFilter.template setBypassed<1>(false);
+                *cutFilter.template get<2>().coefficients = *cutCoefficients[2];
+                cutFilter.template setBypassed<2>(false);
+                break;
+            case Slope_48:
+                *cutFilter.template get<0>().coefficients = *cutCoefficients[0];
+                cutFilter.template setBypassed<0>(false);
+                *cutFilter.template get<1>().coefficients = *cutCoefficients[1];
+                cutFilter.template setBypassed<1>(false);
+                *cutFilter.template get<2>().coefficients = *cutCoefficients[2];
+                cutFilter.template setBypassed<2>(false);
+                *cutFilter.template get<3>().coefficients = *cutCoefficients[3];
+                cutFilter.template setBypassed<3>(false);
+                break;
+        }
+    }
+
     MonoChain leftChain, rightChain;
 
     //==============================================================================
