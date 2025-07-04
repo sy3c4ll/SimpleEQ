@@ -80,6 +80,9 @@ private:
     using Coefficients = Filter::CoefficientsPtr;
     enum ChainPositions { LowCut, Peak, HighCut };
 
+    void updateFilters();
+    void updateLowCutFilters (const ChainSettings& chainSettings);
+    void updateHighCutFilters (const ChainSettings& chainSettings);
     void updatePeakFilter (const ChainSettings& chainSettings);
     static void updateCoefficients (Coefficients& old, const Coefficients& replacements);
 
