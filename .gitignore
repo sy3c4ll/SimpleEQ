@@ -1,4 +1,4 @@
 **/Builds/
 **/JuceLibraryCode/
 **/.cache/
-patchbay.carxp
+**/compile_commands.json
